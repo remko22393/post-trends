@@ -50,7 +50,13 @@ $ curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/lo
 7). Install the latest npm.
 
 ```npm
-npm install --global npm@latest
+$ sudo npm install --global npm@latest
+```
+
+8). Install the latest gulp.
+
+```gulp
+$ sudo npm install --global gulp-cli@latest
 ```
 
 
@@ -64,27 +70,12 @@ In the /post-trends folder,
 
 2). Run `$ composer install` to install the necessary dependencies.
 
-3). Run `$ yarn` to install yarn dependencies.
+3). Run `$ npm install` to install all assets dependencies. 
 
-4). Run `$ npm run build` to compile all the assets(sass, js, media).
+4). Run `$ gulp --gulpfile semantic/gulpfile.js build` to compile the semantic-ui assets.
 
-5). Run `$ php artisan key:generate` to generate a new key.
+5). Run `$ npm run dev` to compile all the assets(sass, js, vue components).
 
-6). Run `$ php artisan config:cache` to reflect the .env configuration.
+6). Run `$ php artisan key:generate` to generate a new key.
 
-
-## Coding Style
-
-- Use [PSR-1](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-1-basic-coding-standard.md) and [PSR-4](http://www.php-fig.org/psr/psr-4/) coding standards.
-
-- PHP tab size is 4.
-
-- Blade/HTML tab size is 2.
-
-- CSS/SCSS/JavaScript tab size is 2.
-
-- Translate tabs to spaces.
-
-- Ensure newline at end of file.
-
-- Trim trailing white space.
+7). Run `$ php artisan config:cache` to reflect the .env configuration.

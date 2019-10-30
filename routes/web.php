@@ -15,8 +15,8 @@ Route::get('/', function () {
     return view('posts.index');
 });
 
-Route::group(['prefix' => 'api/v1', 'namespace' => 'Api\V1', 'as' => 'api.'], function () {
-    Route::resource('posts', 'PostsController', ['except' => ['create', 'edit']]);
+Route::group(['prefix' => 'api/v1', 'namespace' => 'Api\V1'], function ($router) {
+    $router->post('posts', 'PostsController@index');
 });
 
 //Auth::routes();
