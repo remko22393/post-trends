@@ -1,38 +1,67 @@
 <template>
-    <div>
-        <div class="form-group">
-            <router-link :to="{name: 'createPost'}" class="btn btn-success">Create new post</router-link>
+    <div class="post-trend-body">
+        <div class="ui grid post-trend-header-container">
+            <div class="left floated eight wide column post-trend-header">
+                Post trends
+            </div>
+            <div class="right floated eight wide column post-trend-filter mtop-5">
+                <div class="right-float ui dropdown" tabindex="0">
+                    <div class="text fs-16">This month</div>
+                    <i class="fal fa-angle-down icon"></i>
+                    <div class="menu transition hidden dropdown-menu" tabindex="-1">
+                        <div class="item fs-16 pr-50 bb-1">This week</div>
+                        <div class="item fs-16 pr-50">This month</div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="panel panel-default">
-            <div class="panel-heading">Posts list</div>
-            <div class="panel-body">
-                <table class="table table-bordered table-striped">
-                    <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Address</th>
-                        <th>Website</th>
-                        <th>Email</th>
-                        <th width="100"> </th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr v-for="post, index in posts">
-                        <td>{{ post.name }}</td>
-                        <td>{{ post.address }}</td>
-                        <td>{{ post.website }}</td>
-                        <td>{{ post.email }}</td>
-                        <td>
-                            <router-link :to="{name: 'editPost', params: {id: post.id}}" class="btn btn-xs btn-default">
-                                Edit
-                            </router-link>
-                            <a href="#" class="btn btn-xs btn-danger" v-on:click="deleteEntry(post.id, index)">
-                                Delete
-                            </a>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
+        <div class="ui divider"></div>
+        <div class="ui grid">
+            <div class="eight wide column">
+                <div class="perform-title bold-font mtop-15">
+                    Best performing
+                </div>
+                <div class="card mtop-10">
+                    <div class="image">
+                        <img src="images/image1.png">
+                    </div>
+                    <div class="extra">
+                        <div class="mtop-5 fs-12">
+                            Aug 15, 2019
+                        </div>
+                        <div class="ui icon fs-16 mtop-5 inline-block">
+                            <i class="heart icon"></i>
+                            120
+                        </div>
+                        <div class="ui icon fs-16 mtop-5 inline-block ml-10">
+                            <i class="comment icon"></i>
+                            23
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="eight wide column">
+                <div class="perform-title bold-font mtop-15">
+                    Worst performing
+                </div>
+                <div class="card mtop-10">
+                    <div class="image">
+                        <img src="images/image2.png">
+                    </div>
+                    <div class="extra">
+                        <div class="mtop-5 fs-12">
+                            Aug 1, 2019
+                        </div>
+                        <div class="ui icon fs-16 mtop-5 inline-block">
+                            <i class="heart icon"></i>
+                            12
+                        </div>
+                        <div class="ui icon fs-16 mtop-5 inline-block ml-10">
+                            <i class="comment icon"></i>
+                            0
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -49,7 +78,12 @@
             var app = this;
             axios.get('/api/v1/posts')
                 .then(function (resp) {
+                    // Initializing dropdown menu
+                    $('.ui.dropdown')
+                        .dropdown();
+
                     app.posts = resp.data;
+                    console.log('posts', app.posts);
                 })
                 .catch(function (resp) {
                     console.log(resp);

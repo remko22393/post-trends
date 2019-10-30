@@ -5,6 +5,7 @@
  */
 
 require('./bootstrap');
+require('../../semantic/dist/semantic');
 
 window.Vue = require('vue');
 
@@ -26,6 +27,7 @@ window.Vue.use(VueRouter);
 import PostsIndex from './components/posts/PostsIndex.vue';
 import PostsCreate from './components/posts/PostsCreate.vue';
 import PostsEdit from './components/posts/PostsEdit.vue';
+
 
 const routes = [
     {
