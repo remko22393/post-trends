@@ -18,13 +18,20 @@ class PostsController extends Controller
 
 
     /**
-     * Display a listing of the resource.
+     * Get the best & worst posts details with engagement scores.
+     *
+     * Engagement Score Calculation:
+     * ===
+     * 1 like = 1 point
+     * 1 comment = 2 points
+     * Engagement score = like points + comment points
+     * ===
      *
      * @return \Illuminate\Http\JsonResponse
-     * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function index()
+    public function index(Request $request)
     {
+        $period = $request->input('period', '1m');
         $data = self::handle();
 
         $username = $data['graphql']['user']['username'];
@@ -43,7 +50,8 @@ class PostsController extends Controller
             ], true));
 
         $ownerEdges = $data['graphql']['user']['edge_owner_to_timeline_media']['edges'];
-        $posts = [];
+        $bestPost = null;
+        $worstPost = null;
 
         foreach($ownerEdges as $edge) {
             $aPost = [];
@@ -51,11 +59,27 @@ class PostsController extends Controller
             $aPost['thumbnail'] = $edge['node']['thumbnail_src'];
             $aPost['likes_cnt'] = $edge['node']['edge_liked_by']['count'];
             $aPost['comments_cnt'] = $edge['node']['edge_media_to_comment']['count'];
+            $aPost['engagement_score'] = 1 * $aPost['likes_cnt'] + 2 * $aPost['comments_cnt'];
             $aPost['taken_at'] = Carbon::createFromTimeStamp($edge['node']['taken_at_timestamp'])->toFormattedDateString();
             $aPost['taken_at_timestamp'] = $edge['node']['taken_at_timestamp'];
 
-            $posts[] = $aPost;
+            // Start Date of a given period -- current week or current month
+            $startDate = $period == '1w' ? Carbon::now()->startOfWeek()->timestamp : Carbon::now()->firstOfMonth()->timestamp;
+
+            // Highest engagement score = best, lowest engagement score = worst
+            if ($aPost['taken_at_timestamp'] >= $startDate) {
+                $bestPost = $bestPost == null ? $aPost : $bestPost;
+                $bestPost = $bestPost['engagement_score'] >= $aPost['engagement_score'] ? $bestPost : $aPost;
+
+                $worstPost = $worstPost == null ? $aPost : $worstPost;
+                $worstPost = $worstPost['engagement_score'] <= $aPost['engagement_score'] ? $worstPost : $aPost;
+            }
         }
+
+        $posts = [
+            'best_post' => $bestPost,
+            'worst_post' => $worstPost
+        ];
 
         Log::info('Posts Details: ' . print_r($posts, true));
 
@@ -132,7 +156,6 @@ class PostsController extends Controller
     /**
      * Handle the api request payloads.
      *
-     * @return mixed|null
      * @return mixed|null
      */
     public static function handle()
