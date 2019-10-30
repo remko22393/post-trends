@@ -9,13 +9,17 @@ A short description.
 
 - Laravel - v6.2
 
+- MySQL - v5.7
+
+- Vue.js - v2.5
+
 - Bootstrap - v4.0
 
 - jQuery - v3.2
 
-- Vue.js - v2.5
+- Node.js - v10.x
 
-- MySQL - v5.7
+- Npm - v6.x
 
 
 ## Development Environment Setup
@@ -45,7 +49,13 @@ $ sudo apt install php7.3 libapache2-mod-php7.3 php7.3-curl php7.3-mbstring php7
 $ curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer
 ```
 
-6). Download and install Node.js from [nodejs.org/en/download/](https://nodejs.org/en/download/)
+6). Install Node.js LTS 10.x (reference: [installation in ubuntu](https://websiteforstudents.com/how-to-install-node-js-10-11-12-on-ubuntu-16-04-18-04-via-apt-and-snap/))
+
+```nodejs
+$ curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
+$ sudo apt install nodejs
+
+```
 
 7). Install the latest npm.
 

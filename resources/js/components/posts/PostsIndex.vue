@@ -28,14 +28,14 @@
                         <img v-bind:src="posts['best_post']['thumbnail']">
                     </div>
                     <div class="extra">
-                        <div class="mtop-5 fs-12">
+                        <div class="mtop-10 fs-12">
                             {{ posts['best_post']['taken_at'] }}
                         </div>
                         <div class="ui icon fs-16 mtop-5 inline-block">
                             <i class="heart icon"></i>
                             {{ posts['best_post']['likes_cnt'] }}
                         </div>
-                        <div class="ui icon fs-16 mtop-5 inline-block ml-10">
+                        <div class="ui icon fs-16 mtop-5 inline-block ml-20">
                             <i class="comment icon"></i>
                             {{ posts['best_post']['comments_cnt'] }}
                         </div>
@@ -51,14 +51,14 @@
                         <img v-bind:src="posts['worst_post']['thumbnail']">
                     </div>
                     <div class="extra">
-                        <div class="mtop-5 fs-12">
+                        <div class="mtop-10 fs-12">
                             {{ posts['worst_post']['taken_at'] }}
                         </div>
                         <div class="ui icon fs-16 mtop-5 inline-block">
                             <i class="heart icon"></i>
                             {{ posts['worst_post']['likes_cnt'] }}
                         </div>
-                        <div class="ui icon fs-16 mtop-5 inline-block ml-10">
+                        <div class="ui icon fs-16 mtop-5 inline-block ml-20">
                             <i class="comment icon"></i>
                             {{ posts['worst_post']['comments_cnt'] }}
                         </div>
