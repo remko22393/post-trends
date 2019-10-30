@@ -23,19 +23,19 @@
                 </div>
                 <div class="card mtop-10">
                     <div class="image">
-                        <img src="images/image1.png">
+                        <img v-bind:src="posts['best_post']['thumbnail']">
                     </div>
                     <div class="extra">
                         <div class="mtop-5 fs-12">
-                            Aug 15, 2019
+                            {{ posts['best_post']['taken_at'] }}
                         </div>
                         <div class="ui icon fs-16 mtop-5 inline-block">
                             <i class="heart icon"></i>
-                            120
+                            {{ posts['best_post']['likes_cnt'] }}
                         </div>
                         <div class="ui icon fs-16 mtop-5 inline-block ml-10">
                             <i class="comment icon"></i>
-                            23
+                            {{ posts['best_post']['comments_cnt'] }}
                         </div>
                     </div>
                 </div>
@@ -46,19 +46,19 @@
                 </div>
                 <div class="card mtop-10">
                     <div class="image">
-                        <img src="images/image2.png">
+                        <img v-bind:src="posts['worst_post']['thumbnail']">
                     </div>
                     <div class="extra">
                         <div class="mtop-5 fs-12">
-                            Aug 1, 2019
+                            {{ posts['worst_post']['taken_at'] }}
                         </div>
                         <div class="ui icon fs-16 mtop-5 inline-block">
                             <i class="heart icon"></i>
-                            12
+                            {{ posts['worst_post']['likes_cnt'] }}
                         </div>
                         <div class="ui icon fs-16 mtop-5 inline-block ml-10">
                             <i class="comment icon"></i>
-                            0
+                            {{ posts['worst_post']['comments_cnt'] }}
                         </div>
                     </div>
                 </div>
@@ -91,18 +91,7 @@
                 });
         },
         methods: {
-            deleteEntry(id, index) {
-                if (confirm("Do you really want to delete it?")) {
-                    var app = this;
-                    axios.delete('/api/v1/posts/' + id)
-                        .then(function (resp) {
-                            app.posts.splice(index, 1);
-                        })
-                        .catch(function (resp) {
-                            alert("Could not delete post");
-                        });
-                }
-            }
+
         }
     }
 </script>

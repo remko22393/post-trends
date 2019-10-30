@@ -25,8 +25,6 @@ import VueRouter from 'vue-router';
 window.Vue.use(VueRouter);
 
 import PostsIndex from './components/posts/PostsIndex.vue';
-import PostsCreate from './components/posts/PostsCreate.vue';
-import PostsEdit from './components/posts/PostsEdit.vue';
 
 
 const routes = [
@@ -35,16 +33,6 @@ const routes = [
         components: {
             postsIndex: PostsIndex
         }
-    },
-    {
-        path: '/posts/create',
-        component: PostsCreate,
-        name: 'createPost'
-    },
-    {
-        path: '/posts/edit/:id',
-        component: PostsEdit,
-        name: 'editPost'
     },
 ];
 
