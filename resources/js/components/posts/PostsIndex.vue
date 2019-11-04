@@ -12,13 +12,15 @@
                     <i class="fa fa-angle-down"></i>
                     <div class="menu transition hidden dropdown-menu" tabindex="-1">
                         <div class="item fs-16 pr-50 bb-1 active selected" v-on:click="searchPost('1w')">This week</div>
-                        <div class="item fs-16 pr-50" v-on:click="searchPost('1m')">This month</div>
+                        <div class="item fs-16 pr-50 bb-1" v-on:click="searchPost('1m')">This month</div>
+                        <div class="item fs-16 pr-50 bb-1" v-on:click="searchPost('1pw')">Last week</div>
+                        <div class="item fs-16 pr-50 bb-1" v-on:click="searchPost('1pm')">Last month</div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="ui divider"></div>
-        <div class="ui grid" v-if="posts.hasOwnProperty('best_post')">
+        <div class="ui grid" v-if="posts.hasOwnProperty('best_post') && posts['best_post'] !== null">
             <div class="eight wide column">
                 <div class="perform-title bold-font mtop-15">
                     Best performing
@@ -61,6 +63,17 @@
                         <div class="ui icon fs-16 mtop-5 inline-block ml-20">
                             <i class="comment icon"></i>
                             {{ posts['worst_post']['comments_cnt'] }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ui grid" v-else>
+            <div class="sixteen wide column text-center">
+                <div class="card mtop-10">
+                    <div class="extra">
+                        <div class="mtop-10 fs-12">
+                            There is no posts.
                         </div>
                     </div>
                 </div>

@@ -32,9 +32,29 @@ class PostsController extends Controller
      */
     public function index(Request $request)
     {
-        $period = $request->input('period', '1m');
-        $data = self::handle();
+        // Start Date of a given period -- current/last week or current/last month
+        $period = $request->input('period', '1w');
+        $lastDayOfLastMonth = new Carbon('last day of last month');
+        switch ($period) {
+            case '1w':
+                $startDate = Carbon::now()->startOfWeek()->timestamp;
+                break;
+            case '1m':
+                $startDate = Carbon::now()->firstOfMonth()->timestamp;
+                break;
+            case '1pw':
+                $startDate = $lastDayOfLastMonth->startOfWeek()->timestamp;
+                break;
+            case '1pm':
+                $startDate = $lastDayOfLastMonth->firstOfMonth()->timestamp;
+                break;
+            default:
+                $startDate = Carbon::now()->startOfWeek()->timestamp;
+                break;
+        }
 
+        // Handle JSON data source
+        $data = self::handle();
         $username = $data['graphql']['user']['username'];
         $fullname = $data['graphql']['user']['full_name'];
 
@@ -63,9 +83,6 @@ class PostsController extends Controller
             $aPost['engagement_score'] = 1 * $aPost['likes_cnt'] + 2 * $aPost['comments_cnt'];
             $aPost['taken_at'] = Carbon::createFromTimeStamp($edge['node']['taken_at_timestamp'])->toFormattedDateString();
             $aPost['taken_at_timestamp'] = $edge['node']['taken_at_timestamp'];
-
-            // Start Date of a given period -- current week or current month
-            $startDate = $period == '1w' ? Carbon::now()->startOfWeek()->timestamp : Carbon::now()->firstOfMonth()->timestamp;
 
             // Highest engagement score = best, lowest engagement score = worst
             if ($aPost['taken_at_timestamp'] >= $startDate) {
