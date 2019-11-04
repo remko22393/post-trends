@@ -8,12 +8,12 @@
             </div>
             <div class="right floated eight wide column post-trend-filter mtop-5">
                 <div class="right-float ui dropdown" tabindex="0">
-                    <div class="text fs-16">This week</div>
+                    <div class="text fs-16">Last week</div>
                     <i class="fa fa-angle-down"></i>
                     <div class="menu transition hidden dropdown-menu" tabindex="-1">
-                        <div class="item fs-16 pr-50 bb-1 active selected" v-on:click="searchPost('1w')">This week</div>
-                        <div class="item fs-16 pr-50 bb-1" v-on:click="searchPost('1m')">This month</div>
-                        <div class="item fs-16 pr-50 bb-1" v-on:click="searchPost('1pw')">Last week</div>
+                        <!--<div class="item fs-16 pr-50 bb-1 active selected" v-on:click="searchPost('1w')">This week</div>-->
+                        <!--<div class="item fs-16 pr-50 bb-1" v-on:click="searchPost('1m')">This month</div>-->
+                        <div class="item fs-16 pr-50 bb-1 active selected" v-on:click="searchPost('1pw')">Last week</div>
                         <div class="item fs-16 pr-50 bb-1" v-on:click="searchPost('1pm')">Last month</div>
                     </div>
                 </div>
@@ -92,7 +92,7 @@
         data: function () {
             return {
                 posts: [],
-                currentSearchTerm: '1w',
+                currentSearchTerm: '1pw',
                 isLoading: false,
             }
         },
