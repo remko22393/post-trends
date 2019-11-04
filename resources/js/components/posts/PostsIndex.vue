@@ -72,7 +72,7 @@
             <div class="sixteen wide column text-center">
                 <div class="card mtop-10">
                     <div class="extra">
-                        <div class="mtop-10 fs-12">
+                        <div class="mtop-10 fs-16">
                             There is no posts.
                         </div>
                     </div>
